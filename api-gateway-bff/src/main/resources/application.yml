@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: api-gateway-bff
+server:
+  port: 8080
+clients:
+  product:
+    url: http://localhost:8082
+  customer:
+    url: http://localhost:8081
+  order:
+    url: http://localhost:8083
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
