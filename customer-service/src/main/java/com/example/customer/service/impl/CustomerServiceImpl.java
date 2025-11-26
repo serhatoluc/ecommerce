@@ -40,12 +40,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public CustomerResponse create(CustomerRequest request) {
         Customer customer = Customer.builder().name(request.getName()).email(request.getEmail()).build();
         return customerMapper.toResponse(repository.save(customer));
     }
 
     @Override
+    @Transactional
     public CustomerResponse update(Long id, CustomerRequest request) {
         Customer customer = repository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessages.CUSTOMER_NOT_FOUND));
         customer.setName(request.getName());
@@ -54,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new NotFoundException(ErrorMessages.CUSTOMER_NOT_FOUND);

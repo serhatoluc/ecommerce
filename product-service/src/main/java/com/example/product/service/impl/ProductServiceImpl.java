@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductResponse create(ProductRequest request) {
         Product product = Product.builder()
             .name(request.getName())
@@ -44,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductResponse update(Long id, ProductRequest request) {
         Product product = findEntity(id);
         product.setName(request.getName());
@@ -53,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new NotFoundException(ErrorMessages.PRODUCT_NOT_FOUND);
@@ -61,6 +64,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductResponse decreaseStock(Long id, DecreaseStockRequest request) {
         Product product = findEntity(id);
         if (product.getStock() < request.getQuantity()) {

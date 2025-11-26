@@ -39,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemMapper orderItemMapper;
 
     @Override
+    @Transactional
     public OrderResponse create(OrderRequest request) {
         CustomerResponse customer = customerClient.getCustomer(request.getCustomerId());
         Order order = orderMapper.toEntity(request);
